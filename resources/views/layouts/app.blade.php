@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'fa' ? 'rtl' : 'ltr' }}">
+<html class="{{ $theme }}" lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    dir="{{ app()->getLocale() == 'fa' ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -25,10 +26,10 @@
 
 <body>
     <div id="app">
-        @include('layouts.navigation')
+        <x-navigation />
 
         <main class="py-4">
-            @yield('content')
+            {{ $slot }}
         </main>
     </div>
 
