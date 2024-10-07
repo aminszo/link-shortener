@@ -1,84 +1,56 @@
 <x-guest-layout>
-    
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+        <div class="row justify-content-center px-4 px-md-0">
+            <div class="col-md-8 form-box px-5 pt-5 pb-3 mt-5">
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-
-                            <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="current-password">
-
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6 offset-md-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                            {{ old('remember') ? 'checked' : '' }}>
-
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Remember me') }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Log in') }}
-                                    </button>
-
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot your password?') }}
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="form-title text-center mb-4">
+                    {{ __('Login to account') }}
                 </div>
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <!-- Email Address -->
+                    <div class="mb-4">
+                        <input id="email" type="email" class="form-control form-field" name="email"
+                            value="{{ old('email') }}" required autocomplete="email" autofocus
+                            placeholder="{{ __('Email') }}">
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-4">
+                        <input id="password" type="password" class="form-control form-field" name="password" required
+                            placeholder="{{ __('Password') }}">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="mb-0">
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary w-100 primary-button">
+                                {{ __('Login') }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Validation Errors Section -->
+                    @if ($errors->any())
+                        <div class="mt-3 error-message">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </form>
+
+                @if (Route::has('register'))
+                    <p class="mt-4 form-note">
+                        {{ __("Don't have an account?") }}
+                        <a href="{{ route('register') }}"
+                            class="primary-light-text text-decoration-underline">{{ __('Register') }}</a>
+                    </p>
+                @endif
             </div>
         </div>
     </div>

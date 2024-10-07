@@ -1,0 +1,7 @@
+input[type="email"] {
+    direction: rtl;
+}
+
+.form-field {
+    padding: 10px 20px 8px 10px;
+}

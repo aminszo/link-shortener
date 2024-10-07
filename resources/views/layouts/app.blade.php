@@ -22,6 +22,16 @@
         <link rel="stylesheet" href="{{ asset('lib/bootstrap-5.3.3-dist/css/bootstrap.min.css') }}">
     @endif
 
+    <!-- Include custom stylesheet -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    @if (app()->getLocale() == 'fa')
+        <link rel="stylesheet" href="{{ asset('css/rtl-style.css') }}">
+    @endif
+
+    <!-- Favicon -->
+    <!-- <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon"> -->
+
 </head>
 
 <body>

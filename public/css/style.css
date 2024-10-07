@@ -1,0 +1,81 @@
+@import "fonts.css";
+
+.theme-light {
+    --primary-color: #6E54B5;
+    --primary-light-color: #8B61FF;
+    --text-field-border-color: #645E7F;
+    --text-field-bg-color: #3B364C;
+    --text-field-placeholder-color: #9E9E9E;
+    --white-text: #FCFBFE;
+    --form-bg-color: #2B2738;
+    --bg-color: #dbdbdb;
+}
+
+.theme-dark {
+    --primary-color: #6E54B5;
+    --primary-light-color: #8B61FF;
+    --text-field-border-color: #645E7F;
+    --text-field-bg-color: #3B364C;
+    --text-field-placeholder-color: #9E9E9E;
+    --white-text: #FCFBFE;
+    --form-bg-color: #2B2738;
+    --bg-color: #676179;
+}
+
+.primary-light-text {
+    color: var(--primary-light-color);
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Vazir';
+}
+
+.form-box {
+    background-color: var(--form-bg-color);
+    border-radius: 16px;
+}
+
+.form-title {
+    color: var(--white-text);
+    font-size: 28px;
+}
+
+.form-field {
+    background-color: var(--text-field-bg-color);
+    border-color: var(--text-field-border-color);
+    color: var(--white-text);
+    padding: 10px 10px 8px 20px;
+}
+
+.form-field::placeholder {
+    color: var(--text-field-placeholder-color);
+    opacity: 1;
+}
+
+.form-field:focus {
+    background-color: var(--text-field-bg-color);
+    border-color: var(--primary-light-color);
+    box-shadow: none;
+    color: var(--white-text);
+}
+
+.form-note {
+    color: var(--text-field-placeholder-color);
+}
+
+.primary-button {
+    background-color: var(--primary-color);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+}
+
+.primary-button:hover,
+.primary-button:active {
+    background-color: var(--primary-light-color) !important;
+}
+
+.error-message {
+    color: rgb(210, 0, 0);
+}
