@@ -11,6 +11,13 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    // Define the relationship to the Link model
+    // A user can have many links (one-to-many)
+    public function links()
+    {
+        return $this->hasMany(Link::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
