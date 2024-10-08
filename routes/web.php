@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RedirectController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,3 +31,5 @@ Route::get('lang/{locale}', function ($locale) {
 })->name('lang.switch');
 
 require __DIR__ . '/auth.php';
+
+Route::get('{slug}', [RedirectController::class, 'index']);

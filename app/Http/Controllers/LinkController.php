@@ -94,7 +94,7 @@ class LinkController extends Controller
 
         $rules = [
             'destination' => ['required', 'url', 'max:2048'],
-            'slug' => ['nullable', 'string', 'min:2', 'max:20', 'unique:links,slug'],
+            'slug' => ['nullable', 'string', 'min:2', 'max:20', 'unique:links,id'],
             'title' => ['nullable', 'string', 'max:80'],
             'description' => ['nullable', 'string', 'max:255'],
             'visits_limit' => ['nullable', 'numeric', 'integer', 'min:1', 'max:100000000'],
