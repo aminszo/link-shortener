@@ -13,7 +13,10 @@ return [
     |
     */
 
+    // The default application name will not be read from the .env file and is hardcoded to "linky".
     'name' => 'linky',
+
+    // You can uncomment the line below to read the app name from the .env file instead:
     // env('APP_NAME', 'Laravel'),
 
     /*
@@ -66,6 +69,7 @@ return [
     |
     */
 
+    // Default app timezone is change to iran standard time.
     'timezone' => env('APP_TIMEZONE', 'Asia/Tehran'),
 
     /*

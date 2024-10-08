@@ -22,14 +22,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/dashboard/delete/{link}', [LinkController::class, 'destroy'])->name('links.delete');
 });
 
+// User can change the app locale using this route
 Route::get('lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'fa'])) {  // Ensure only valid locales are set
         // Set the cookie for 1 year (60 minutes * 24 hours * 365 days)
         Cookie::queue('user_lang', $locale, 60 * 24 * 365);
+    } else {
+        return abort(404); // if locale is not valid, return 404 error
     }
     return redirect()->back(); // Redirect back to the page the user came from
 })->name('lang.switch');
 
 require __DIR__ . '/auth.php';
 
+/*
+* This route handles redirection logic for all link slugs.
+* This MUST be the last rule in routes file, so if the requested url does not match any of
+* the application's defined urls, it will be treated as a link slug.
+*/
 Route::get('{slug}', [RedirectController::class, 'index']);

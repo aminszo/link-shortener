@@ -32,6 +32,7 @@ return [
     |
     */
 
+    // Session lifetime was 120 minutes by default, and it is increased to 72 hours
     'lifetime' => env('SESSION_LIFETIME', 4320), // 4320 minutes = 72 hours
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
@@ -129,7 +130,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'laravel'), '_').'_session'
+        Str::slug(env('APP_NAME', 'laravel'), '_') . '_session'
     ),
 
     /*

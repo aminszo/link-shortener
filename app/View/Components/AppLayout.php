@@ -12,6 +12,7 @@ class AppLayout extends Component
      * Create the component instance.
      */
     public function __construct(
+        // $theme variable to set the ui theme in html tag. default value is "theme-dark"
         public string $theme = "theme-dark",
     ) {}
 
