@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Link;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -21,24 +22,56 @@ class LinkController extends Controller
     public function store(Request $request)
     {
 
-        $validation = $this->create_link_validator($request);
+        [$validation_result, $validator] = $this->create_link_validation($request);
 
-        if ($validation['result'] === false) { // means validation is failed
+        if ($validation_result === 'fail') { // means validation is failed
             return back()
-                ->withErrors($validation['validator'])
+                ->withErrors($validator)
                 ->withInput();
         }
 
-        $data = $validation['validator']->validated();
-
+        $data = $validator->validated();
         $link = new Link($data);
 
-        $link->slug = $this->generateSlug($data['slug']);
+        $link->slug = $this->generateSlug($request->slug);
         $link->user_id = auth()->id();
 
         $link->save();
 
         return redirect()->route('dashboard')->with('message', ['success', 'Link shortened successfully!']);
+    }
+
+    // Show edit form for a specific link
+    public function edit(Link $link)
+    {
+        if ($link->expires_at != null) {
+            $link->expires_at = Carbon::createFromFormat('Y-m-d H:i:s', $link->expires_at)->format('Y-m-d');;
+        }
+
+        return view('edit', compact('link'));
+    }
+
+    // Method to handle updating a link 
+    public function update(Request $request, Link $link)
+    {
+        [$validation_result, $validator] = $this->create_link_validation($request);
+
+        if ($validation_result === 'fail') { // means validation is failed
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $link->update($validator->validated());
+
+        return redirect()->route('dashboard')->with('message', ['success', 'Link updated successfully!']);
+    }
+
+    public function destroy(Link $link)
+    {
+        $link->delete();
+
+        return redirect()->route('dashboard')->with('message', ['success', 'Link deleted!']);
     }
 
     private function generateSlug($customSlug = null)
@@ -56,7 +89,7 @@ class LinkController extends Controller
         return $slug;
     }
 
-    private function create_link_validator(Request $request)
+    private function create_link_validation(Request $request)
     {
 
         $rules = [
@@ -64,7 +97,7 @@ class LinkController extends Controller
             'slug' => ['nullable', 'string', 'min:2', 'max:20', 'unique:links,slug'],
             'title' => ['nullable', 'string', 'max:80'],
             'description' => ['nullable', 'string', 'max:255'],
-            'clicks_limit' => ['nullable', 'numeric', 'integer', 'min:1', 'max:100000000'],
+            'visits_limit' => ['nullable', 'numeric', 'integer', 'min:1', 'max:100000000'],
             'expires_at' => ['nullable', 'date'],
         ];
         $messages = [];
@@ -73,15 +106,15 @@ class LinkController extends Controller
             'slug' => __('Custom link'),
             'title' => __('Title'),
             'description' => __('Description'),
-            'clicks_limit' => __('Clicks limit'),
+            'visits_limit' => __('Clicks limit'),
             'expires_at' => __('Expire date')
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages, $attributes);
 
         if ($validator->fails())
-            return ['result' => false, 'validator' => $validator];
+            return ['fail', $validator];
 
-        return ['result' => true, 'validator' => $validator];
+        return ['pass', $validator];
     }
 }

@@ -16,8 +16,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [LinkController::class, 'index'])->name('dashboard');
     Route::post('/dashboard', [LinkController::class, 'store'])->name('links.store');
-    // Route::get('/dashboard/edit/{link}', [LinkController::class, 'edit'])->name('links.edit');
-    // Route::post('/dashboard/link/update', [LinkController::class, 'store'])->name('links.update');
+    Route::get('/dashboard/edit/{link}', [LinkController::class, 'edit'])->name('links.edit');
+    Route::put('/dashboard/update/{link}', [LinkController::class, 'update'])->name('links.update');
+    Route::delete('/dashboard/delete/{link}', [LinkController::class, 'destroy'])->name('links.delete');
 });
 
 Route::get('lang/{locale}', function ($locale) {
@@ -28,4 +29,4 @@ Route::get('lang/{locale}', function ($locale) {
     return redirect()->back(); // Redirect back to the page the user came from
 })->name('lang.switch');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
