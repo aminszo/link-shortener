@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use App\Models\Link;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 class LinkController extends Controller
@@ -54,7 +56,7 @@ class LinkController extends Controller
     // Method to handle updating a link 
     public function update(Request $request, Link $link)
     {
-        [$validation_result, $validator] = $this->create_link_validation($request);
+        [$validation_result, $validator] = $this->create_link_validation($request, $link);
 
         if ($validation_result === 'fail') { // means validation is failed
             return back()
@@ -89,18 +91,45 @@ class LinkController extends Controller
         return $slug;
     }
 
-    private function create_link_validation(Request $request)
+    private function create_link_validation(Request $request, Link $link = null)
     {
 
+        // Get all defined routes
+        $disallowedSlugs = collect(Route::getRoutes())->filter(function ($route) {
+            return $route->methods[0] === 'GET'; // Filter for GET routes (or customize as needed)
+        })->pluck('uri')->map(function ($uri) {
+            return explode('/', trim($uri, '/'))[0]; // Get the first part of the URI
+        })->unique()->toArray(); // Get unique slugs
+
+        $disallowedSlugs = array_merge($disallowedSlugs, ['logout']); // Add static items for disallowed slugs here
+
+
         $rules = [
-            'destination' => ['required', 'url', 'max:2048'],
-            'slug' => ['nullable', 'string', 'min:2', 'max:20', 'unique:links,id'],
+            'destination' => [
+                'required',
+                'max:2048',
+                'regex:/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/=]*)/i' // source : https://regexr.com/39nr7
+            ],
+            'slug' => [
+                'nullable',
+                'string',
+                'min:2',
+                'max:20',
+                'regex:/^[a-zA-z0-9]+(?:(?:-|_)+[a-zA-Z0-9]+)*$/',
+                Rule::unique('links', 'slug')->ignore($link->id ?? null),
+                Rule::notIn($disallowedSlugs),
+            ],
             'title' => ['nullable', 'string', 'max:80'],
             'description' => ['nullable', 'string', 'max:255'],
             'visits_limit' => ['nullable', 'numeric', 'integer', 'min:1', 'max:100000000'],
             'expires_at' => ['nullable', 'date'],
         ];
-        $messages = [];
+        $messages = [
+            // 'destination.regex' => '',
+            'slug.not_in' => __('validation.unique'), // same message as 'uniqe' rule
+            // 'slug.regex' => '',
+
+        ];
         $attributes = [
             'destination' => __('Destination URL'),
             'slug' => __('Custom link'),
