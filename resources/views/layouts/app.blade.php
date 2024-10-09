@@ -25,6 +25,9 @@
         <link rel="stylesheet" href="{{ asset('css/rtl-style.css') }}">
     @endif
 
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="{{ asset('/lib/fontawesome-free-6.4.2-web/css/all.css') }}">
+    
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
@@ -33,7 +36,12 @@
 
 <body>
     <div id="app">
-        <x-navigation />
+
+        @if ($navigation->isEmpty())
+
+        @else
+            {{ $navigation }}
+        @endif
 
         <main class="py-4">
             {{ $slot }}

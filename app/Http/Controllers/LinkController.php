@@ -20,6 +20,11 @@ class LinkController extends Controller
         return view('dashboard', compact('links')); // Return the dashboard view with the user's links
     }
 
+    // Display a form for creating new link
+    public function create() {
+        return view('create');
+    }
+
     // Store a new link and redirect back to the dashboard
     public function store(Request $request)
     {

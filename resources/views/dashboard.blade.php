@@ -1,4 +1,9 @@
 <x-app-layout>
+
+    <x-slot:navigation>
+        <x-navigation />
+    </x-slot>
+
     <div class="container">
         <div class="row justify-content-center">
 
@@ -6,46 +11,46 @@
 
             <div class="col-md-8">
 
-                <div class="card my-2">
-                    <div class="card-header">{{ __('Create New') }}</div>
+                @foreach ($links as $link)
+                    <div class="card my-2">
+                        <div class="card-header">{{ $link->title }}</div>
 
-                    <div class="card-body">
-                        <x-create-new-link-form />
+                        <div class="card-body">
+                            <div>
+                                Link : <a href="">{{request()->root()}}/{{ $link->slug }}</a>
+                            </div>
+                            <div>
+                                Destination: {{ $link->destination }}
+                            </div>
+                            <div>
+                                Visits Count : {{ $link->visits_count }}
+                            </div>
+                            <p>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse-{{$link->id}}" aria-expanded="false" aria-controls="collapse-{{$link->id}}">
+                                    {{__('More')}}
+                                </button>
+                            </p>
+
+                            <div>
+                                <a href="{{ route('links.edit', $link) }}" class="btn btn-warning">Edit</a>
+                            </div>
+
+                            <div class="collapse" id="collapse-{{$link->id}}">
+                                <p>
+                                    {{ __('Created at') }}: {{ $link->created_at }}
+                                </p>
+                                <p>
+                                    {{ __('Visits limit') }}: {{ $link->visits_limit }}
+                                </p>
+                                <p>
+                                    {{ __('Last visit date') }}: {{ $link->last_visited_at }}
+                                </p>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
-
-                    <div class="card-body">
-                        {{ __("You're logged in!") }}
-                    </div>
-                </div>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Slug</th>
-                            <th>Destination</th>
-                            <th>Visits</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($links as $link)
-                            <tr>
-                                <td>{{ $link->title }}</td>
-                                <td>{{ $link->slug }}</td>
-                                <td>{{ $link->destination }}</td>
-                                <td>{{ $link->visits_count }}</td>
-                                <td>
-                                    <a href="{{ route('links.edit', $link) }}" class="btn btn-warning">Edit</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                @endforeach
             </div>
         </div>
     </div>

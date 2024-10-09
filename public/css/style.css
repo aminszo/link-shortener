@@ -1,25 +1,26 @@
 @import "fonts.css";
 
 .theme-light {
-    --primary-color: #6E54B5;
-    --primary-light-color: #8B61FF;
-    --text-field-border-color: #645E7F;
-    --text-field-bg-color: #3B364C;
-    --text-field-placeholder-color: #9E9E9E;
-    --white-text: #FCFBFE;
-    --form-bg-color: #2B2738;
+    --primary-color: #6e54b5;
+    --primary-light-color: #8b61ff;
+    --text-field-border-color: #645e7f;
+    --text-field-bg-color: #3b364c;
+    --text-field-placeholder-color: #9e9e9e;
+    --white-text: #fcfbfe;
+    --form-bg-color: #2b2738;
     --bg-color: #dbdbdb;
 }
 
 .theme-dark {
-    --primary-color: #6E54B5;
-    --primary-light-color: #8B61FF;
-    --text-field-border-color: #645E7F;
-    --text-field-bg-color: #3B364C;
-    --text-field-placeholder-color: #9E9E9E;
-    --white-text: #FCFBFE;
-    --form-bg-color: #2B2738;
+    --primary-color: #6e54b5;
+    --primary-light-color: #8b61ff;
+    --text-field-border-color: #645e7f;
+    --text-field-bg-color: #3b364c;
+    --text-field-placeholder-color: #9e9e9e;
+    --white-text: #fcfbfe;
+    --form-bg-color: #2b2738;
     --bg-color: #676179;
+    --form-box-header-bg-color: #494559;
 }
 
 .primary-light-text {
@@ -28,7 +29,7 @@
 
 body {
     background-color: var(--bg-color);
-    font-family: 'Vazir';
+    font-family: "Vazir";
 }
 
 .form-box {
@@ -41,13 +42,22 @@ body {
     font-size: 28px;
 }
 
+.form-box-header {
+    background-color: var(--form-box-header-bg-color);
+    border-radius: 16px 16px 0 0;
+    font-size: 22px;
+    padding: 12px 20px;
+}
+
 .form-field {
     background-color: var(--text-field-bg-color);
     border-color: var(--text-field-border-color);
     color: var(--white-text);
     padding: 10px 10px 8px 20px;
 }
-
+.form-label {
+    color: var(--white-text);
+}
 .form-field::placeholder {
     color: var(--text-field-placeholder-color);
     opacity: 1;
@@ -78,4 +88,29 @@ body {
 
 .error-message {
     color: rgb(210, 0, 0);
+}
+
+/* Hide number input default arrows */
+input[type="number"] {
+    -webkit-appearance: none; /* Hide default spinners in Chrome */
+    -moz-appearance: textfield; /* Hide default spinners in Firefox */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+.navbar-icon {
+    margin-right: 5px;
+}
+
+.navbar {
+    background-color: var(--text-field-bg-color);
+}
+
+.text {
+    color: var(--white-text);
 }

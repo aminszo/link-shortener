@@ -8,7 +8,7 @@ use App\Http\Controllers\RedirectController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -16,7 +16,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [LinkController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard', [LinkController::class, 'store'])->name('links.store');
+    Route::get('/dashboard/create', [LinkController::class, 'create'])->name('links.create');
+    Route::post('/dashboard/create', [LinkController::class, 'store'])->name('links.store');
     Route::get('/dashboard/edit/{link}', [LinkController::class, 'edit'])->name('links.edit');
     Route::put('/dashboard/update/{link}', [LinkController::class, 'update'])->name('links.update');
     Route::delete('/dashboard/delete/{link}', [LinkController::class, 'destroy'])->name('links.delete');
