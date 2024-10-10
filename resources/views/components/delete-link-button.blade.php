@@ -1,5 +1,5 @@
 <!-- Delete Button with Modal Confirmation -->
-<button type="button" class="btn btn-warning w-100" data-bs-toggle="modal"
+<button type="button" class="btn btn-danger" data-bs-toggle="modal"
     data-bs-target="#confirmDeleteModal-{{$link->id}}">
     {{ __('Delete') }}
 </button>

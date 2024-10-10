@@ -1,4 +1,5 @@
-<x-guest-layout>
+<x-app-layout>
+    
     <div class="container">
         <div class="row justify-content-center px-4 px-md-0">
             <div class="col-md-8 form-box px-5 pt-5 pb-3 mt-5">
@@ -54,4 +55,4 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-app-layout>

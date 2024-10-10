@@ -37,13 +37,9 @@
 <body>
     <div id="app">
 
-        @if ($navigation->isEmpty())
+        <x-navigation />
 
-        @else
-            {{ $navigation }}
-        @endif
-
-        <main class="py-4">
+        <main>
             {{ $slot }}
         </main>
     </div>

@@ -1,11 +1,6 @@
 <x-app-layout>
 
-    <x-slot:navigation>
-        <x-navigation />
-    </x-slot>
-
-
-    <div class="container">
+    <div class="container py-4">
         <div class="row justify-content-center">
 
             <x-session-message />

@@ -1,5 +1,5 @@
-<x-guest-layout>
-    <div class="container">
+<x-app-layout>
+    <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -27,4 +27,4 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-app-layout>

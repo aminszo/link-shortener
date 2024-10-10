@@ -1,31 +1,45 @@
 <nav class="navbar navbar-expand-md shadow-sm">
     <div class="container">
+
         {{-- <a class="navbar-brand" href="{{ route('dashboard') }}">
             {{ __('Dashboard') }}
         </a> --}}
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span> <span>{{__('Menu')}}</span>
+            <i class="fa-solid fa-bars"></i> <span>{{ __('Menu') }}</span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto navbar-only-sm d-md-none">
+            @auth
+                <li class="nav-item ms-3">
+                    <a class="nav-link" href="{{ route('dashboard') }}"><i class="fa-solid fa-link me-1">
+                        </i>{{ __('My links') }}</a>
+                </li>
+                <li class="nav-item ms-3">
+                    <a class="nav-link" href="{{ route('links.create') }}"><i class="fa-solid fa-plus me-1">
+                        </i>{{ __('Create new') }}</a>
+                </li>
+            @endauth
+        </ul>
+
+        <div class="collapse navbar-collapse mt-3 mt-md-0" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('home') }}"><i class="fa-solid fa-house navbar-icon"></i>
+                    <a class="nav-link" href="{{ route('home') }}"><i class="fa-solid fa-house navbar-icon"></i>
                         </i>{{ __('Home') }}</a>
                 </li>
 
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('dashboard') }}"><i class="fa-solid fa-link navbar-icon">
-                            </i>{{ __('My Links') }}</a>
+                    <li class="nav-item d-none d-md-block">
+                        <a class="nav-link" href="{{ route('dashboard') }}"><i class="fa-solid fa-link me-1">
+                            </i>{{ __('My links') }}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('links.create') }}"><i
-                                class="fa-solid fa-plus navbar-icon"> </i>{{ __('Create new') }}</a>
+                    <li class="nav-item d-none d-md-block">
+                        <a class="nav-link" href="{{ route('links.create') }}"><i class="fa-solid fa-plus me-1">
+                            </i>{{ __('Create new') }}</a>
                     </li>
                 @endauth
 
@@ -36,12 +50,12 @@
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('login') }}">
+                        <a class="nav-link" href="{{ route('login') }}">
                             {{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('register') }}">
+                            <a class="nav-link" href="{{ route('register') }}">
                                 {{ __('Register') }}</a>
                         </li>
                     @endif

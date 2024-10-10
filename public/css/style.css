@@ -21,6 +21,14 @@
     --form-bg-color: #2b2738;
     --bg-color: #676179;
     --form-box-header-bg-color: #494559;
+
+    --navbar-color: #3b364c;
+    --dropdown-bg-color: #333042;
+    --dropdown-hover-bg-color: #848893;
+    --navbar-item-text-color: #cecece;
+    --tex-color-1 : #cecece;
+    --navbar-active-item-text-color: #fcfbfe;
+    --link-box-bg-color: #3b354f;
 }
 
 .primary-light-text {
@@ -29,7 +37,6 @@
 
 body {
     background-color: var(--bg-color);
-    font-family: "Vazir";
 }
 
 .form-box {
@@ -87,8 +94,9 @@ body {
 }
 
 .error-message {
-    color: rgb(210, 0, 0);
+    color: rgb(255 86 86);
 }
+
 
 /* Hide number input default arrows */
 input[type="number"] {
@@ -102,15 +110,80 @@ input[type="number"]::-webkit-inner-spin-button {
     appearance: none;
 }
 
-
-.navbar-icon {
-    margin-right: 5px;
+/* ----------  Begin "link item" ---------- */
+.link-box {
+    background-color: var(--link-box-bg-color);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    color: var(--tex-color-1);
 }
+.link-item-body {
+    padding: 15px 25px;
+}
+
+.link-title {
+    color: var(--white-text);
+    font-size: 28px;
+}
+
+.link-item-header {
+    background-color: var(--form-box-header-bg-color);
+    border-radius: 10px 10px 0 0;
+    font-size: 19px;
+    padding: 6px 20px;
+}
+
+.link-destination  {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.link-destination a {
+    color: var(--tex-color-1);
+}
+/* ----------  End "link item" ---------- */
+
+/* ----------  Begin "Navbar" ---------- */
 
 .navbar {
-    background-color: var(--text-field-bg-color);
+    background-color: var(--navbar-color);
 }
+.navbar * {
+    color: var(--navbar-item-text-color);
+}
+.navbar-nav .nav-link.show,
+a.nav-link:focus,
+.nav-item:hover * {
+    color: var(--navbar-active-item-text-color);
+}
+.navbar-toggler {
+    border: none;
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+.navbar-toggler:hover * {
+    color: var(--navbar-active-item-text-color);
+}
+.navbar-only-sm {
+    flex-direction: row;
+}
+.dropdown-menu {
+    background-color: var(--dropdown-bg-color);
+}
+.dropdown-item:hover {
+    color: var(--navbar-active-item-text-color);
+    background: var(--dropdown-hover-bg-color);
+}
+
+/* ----------  End "Navbar" ---------- */
 
 .text {
     color: var(--white-text);
+}
+
+
+.homepage-card {
+    background-color: var(--navbar-color);
+    color : var(--tex-color-1);
 }
