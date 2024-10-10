@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\App;
 
-class SetLanguageFromCookie
+class setLanguageFromCookie
 {
     /**
      * Handle an incoming request to set the application's locale from a cookie.

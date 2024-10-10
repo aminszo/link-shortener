@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\SetLanguageFromCookie;
+use App\Http\Middleware\setLanguageFromCookie;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // register "SetLanguageFromCookie" to middlewares.
-        $middleware->append(SetLanguageFromCookie::class);
+        $middleware->append(setLanguageFromCookie::class);
 
         /*
         * exclude the 'user_lang' cookie from laravel's automatic cookie encription.
