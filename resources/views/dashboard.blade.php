@@ -19,22 +19,24 @@
                                 $created_at = substr($link->created_at, 0, 10);
                             @endphp
                             <p>
-                                <b><a href="{{ $link->slug }}">{{ $full_url }}</a></b>
+                                <b><a target="__blank" href="{{ $link->slug }}">{{ $full_url }}</a></b>
                             </p>
                             <p class="link-destination">
-                                <a href="{{ $link->destination }}">{{ $link->destination }}</a>
+                                <a target="__blank" href="{{ $link->destination }}">{{ $link->destination }}</a>
                             </p>
                             <p>
-                                <span class="me-4"><i class="fa-solid fa-chart-simple"></i> Visits : {{ $link->visits_count }}</span>
+                                <span class="me-4"><i class="fa-solid fa-chart-simple"></i> Visits :
+                                    {{ $link->visits_count }}</span>
                                 <span><i class="fa-regular fa-calendar"></i> {{ $created_at }}</span>
                             </p>
                             <p>
                                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{ $link->id }}" aria-expanded="false"
                                     aria-controls="collapse-{{ $link->id }}">
-                                    {{ __('More') }}
+                                    {{ __('Details') }}
                                 </button>
-                                <a href="{{ route('links.edit', $link) }}" class="btn btn-warning">Edit</a>
+                                <a href="{{ route('links.edit', $link) }}"
+                                    class="btn btn-warning">{{ __('Edit') }}</a>
                                 <x-delete-link-button :link="$link" />
 
                             </p>

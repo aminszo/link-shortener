@@ -4,6 +4,8 @@
     "Create new": "ساخت لینک",
     "Home": "خانه",
     "Menu": "منو",
+    "Confirm Delete" : "تأیید حذف",
+    "Are you sure you want to delete this link? This action cannot be undone." : "آیا مطمئنید که می‌خواهید این لینک را حذف کنید؟ این عمل غیرقابل برگشت است.",
 
     "floors":"طبقات",
     "metraj":"متراژ",
