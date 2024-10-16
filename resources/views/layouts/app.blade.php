@@ -27,7 +27,7 @@
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="{{ asset('/lib/fontawesome-free-6.4.2-web/css/all.css') }}">
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
@@ -37,7 +37,9 @@
 <body>
     <div id="app">
 
-        <x-navigation />
+        @if ($showNav === "true")
+            <x-navigation />
+        @endif
 
         <main>
             {{ $slot }}

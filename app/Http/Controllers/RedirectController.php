@@ -16,19 +16,19 @@ class RedirectController extends Controller
 
         // If no link is found, return a 404 response
         if ($link === null) {
-            return '404'; // change to a 404 view.
+            return response()->view('errors.404', [], 404);
         }
 
         // if the visits limit has been reached, return a proper response.
         if (($link->visits_limit) !== null && $link->visits_count >= $link->visits_limit) {
-            return "limit reached";
+            return view('errors.inactive-link');
         }
 
         // if the link has expired, return a proper response.
         if ($link->expires_at !== null) {
             $expiration = Carbon::createFromFormat('Y-m-d H:i:s', $link->expires_at);
             if ($expiration->lessThanOrEqualTo(now())) {
-                return "expired";
+                return view('errors.inactive-link');
             }
         }
 
