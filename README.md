@@ -24,20 +24,20 @@ Full documentation for the Linky project is available at: [Linky Documentation](
 
 Guide on how to set up this project is available at: [Setup Instructions](http://docs.aminlog.ir/linky/setup).
 
-# Technologies Used
+## Technologies Used
 
 -   Backend: Laravel 11 (PHP 8.2)
 -   Database: MySQL
 -   Frontend: Bootstrap, Laravel Blade templating system
 
-# Contributions
+## Contributions
 
 We welcome contributions! Feel free to check the repository and open a pull request.
 
-# License
+## License
 
 This project is open-source and available under the MIT License.
 
-# Contact
+## Contact
 
 For any questions or feedback, reach out via email at: **amin.salehizade@gmail.com**.
