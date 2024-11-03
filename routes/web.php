@@ -6,22 +6,25 @@ use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RedirectController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+route::view('/', 'welcome')->name('home');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware('auth')->controller(ProfileController::class)
+    ->name('profile.')->group(function () {
+        Route::get('/profile', 'edit')->name('edit');
+        Route::patch('/profile', 'update')->name('update');
+        Route::delete('/profile', 'destroy')->name('destroy');
+    });
 
-    Route::get('/dashboard', [LinkController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/create', [LinkController::class, 'create'])->name('links.create');
-    Route::post('/dashboard/create', [LinkController::class, 'store'])->name('links.store');
-    Route::get('/dashboard/edit/{link}', [LinkController::class, 'edit'])->name('links.edit');
-    Route::put('/dashboard/update/{link}', [LinkController::class, 'update'])->name('links.update');
-    Route::delete('/dashboard/delete/{link}', [LinkController::class, 'destroy'])->name('links.delete');
-});
+Route::get('/dashboard', [LinkController::class, 'index'])->middlleware('auth')->name('dashboard');
+
+Route::middleware('auth')->controller(LinkController::class)
+    ->prefix('link')->name('links.')->group(function () {
+        Route::get('/create', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/edit/{link}', 'edit')->name('edit');
+        Route::patch('/update/{link}', 'update')->name('update');
+        Route::delete('/delete/{link}', 'destroy')->name('delete');
+    });
 
 // User can change the app locale using this route
 Route::get('lang/{locale}', function ($locale) {
